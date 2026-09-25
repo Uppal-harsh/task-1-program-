@@ -5,7 +5,7 @@ import * as THREE from 'three';
 // Scattered floating glowing particles / spheres
 function ParticleField({ count = 20, isBeige = false }) {
   const meshRef = useRef();
-  
+
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
@@ -35,6 +35,7 @@ function ParticleField({ count = 20, isBeige = false }) {
           // subtle pulse
           const pulse = 1 + Math.sin(t * 2 + p.phase) * 0.2;
           child.scale.setScalar(p.scale * pulse);
+
         }
       });
     }
@@ -96,7 +97,7 @@ function WireframeIcosahedron({ mousePos, themeMode }) {
   useFrame((_, delta) => {
     // 1. Slow continuous auto-rotation
     const autoSpeed = 0.4 * delta;
-    
+
     // 2. Mouse tilt target calculation (up to ±15 degrees = ±0.2618 radians)
     const maxTilt = THREE.MathUtils.degToRad(15);
     const targetX = -mousePos.current.y * maxTilt;
@@ -170,7 +171,7 @@ function WireframeIcosahedron({ mousePos, themeMode }) {
 // Scene lighting with soft rim light behind the object
 function SceneLighting({ themeMode }) {
   const rimColor = themeMode === 'warm-beige' ? '#f5ebd7' : '#ffffff';
-  
+
   return (
     <>
       {/* Ambient base lighting for clean monochrome visibility */}
@@ -178,7 +179,7 @@ function SceneLighting({ themeMode }) {
 
       {/* Key front-right light */}
       <directionalLight position={[5, 5, 5]} intensity={1.2} color="#ffffff" />
-      
+
       {/* Fill cool light */}
       <directionalLight position={[-5, -2, 3]} intensity={0.5} color="#d4d4d8" />
 
